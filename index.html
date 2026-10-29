@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" id="page-description" content="SmartGN monitors natural gas supply with real-time IoT telemetry, alerts, and control." />
+  <title id="page-title">SmartGN | Real-Time Natural Gas Management and Monitoring</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+ 
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="brand" id="brand-link" aria-label="SmartGN Home">
+        <img src="assets/newlogo.png" alt="Ventrax SmartGN logo" class="brand-logo" />
+        <span class="brand-name">Smart<span>GN</span></span>
+      </a>
+
+      <nav class="nav-links" id="primary-navigation" aria-label="Main navigation">
+        <a href="#product" id="nav-product">Product</a>
+        <a href="#plans" id="nav-plans">Plans</a>
+        <a href="#countries" id="nav-countries">Countries</a>
+        <a href="#regions" id="nav-regions">Regions</a>
+        <a href="#about-us" id="nav-about">About Us</a>
+      </nav>
+
+      <button class="nav-menu-toggle" id="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <div class="nav-actions">
+        <div class="lang-toggle" id="language-label" role="group" aria-label="Language">
+          <button class="lang-option is-active" type="button" data-lang="EN" aria-pressed="true">EN</button>
+          <button class="lang-option" type="button" data-lang="ES" aria-pressed="false">ES</button>
+        </div>
+        <a href="#request-installation" id="nav-contracting" class="nav-contracting">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home-page">
+  <!-- HERO CAROUSEL -->
+  <section id="home" class="hero-carousel">
+    <div class="carousel-track" id="carousel-track">
+      
+      <!-- Slide 1: Main hero -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1 id="hero-title">Real-Time Natural Gas<br>Supply Management<br>and Monitoring</h1>
+          <p class="hero-subtitle" id="hero-sub">Get started now</p>
+          <p class="hero-cta-text" id="hero-cta">Control, Security, and IoT Telemetry</p>
+          <a href="#request-installation" class="btn-primary" id="btn-redirect">Request Installation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 2: Product overview -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2 id="prod-q1-title" class="alt-typography slide-title">What do we do?</h2>
+          <p id="prod-q1-desc" class="slide-desc">We digitalize traditional natural gas management through advanced IoT infrastructure. We connect your physical meters to a highly scalable cloud platform, capable of processing consumption telemetry, pressure, and valve states in real-time.</p>
+        </div>
+      </div>
+
+      <!-- Slide 3: Problem and solution -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2 id="prod-q2-title" class="alt-typography slide-title">How do we solve your problem?</h2>
+          <p id="prod-q2-desc" class="slide-desc">We eliminate uncertainty in your bills and slow reaction times to incidents. You will receive immediate alerts via email, SMS, or WhatsApp regarding any anomaly or potential leak, and you'll be able to view your expenses in PEN before the end of the month.</p>
+        </div>
+      </div>
+
+      <!-- Slide 4: Trust and security -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2 id="prod-q3-title" class="alt-typography slide-title">Why trust us?</h2>
+          <p id="prod-q3-desc" class="slide-desc">SmartGN is an ecosystem developed by Ventrax, founded on clean architectures, end-to-end data encryption, and high availability (99.5%). Additionally, we integrate a centralized directory of verified technicians ready to assist you.</p>
+        </div>
+      </div>
+
+    </div>
+    <button class="carousel-btn prev" id="carousel-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-btn next" id="carousel-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+  </section>
+
+  <!-- PRODUCT FEATURES -->
+  <section id="product" class="section" style="padding-top: 4rem;">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fa-solid fa-microchip"></i>
+          <h4 id="feat-1-title">Precise IoT Hardware</h4>
+          <p id="feat-1-desc">High-tech sensors installed by experts that measure gas pressure and volume without interruption.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h4 id="feat-2-title">Risk Prevention</h4>
+          <p id="feat-2-desc">The system detects anomalies and leaks in seconds, sending immediate alerts to your email, SMS, or WhatsApp.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-chart-pie"></i>
+          <h4 id="feat-3-title">Savings and Control</h4>
+          <p id="feat-3-desc">View your metrics converted to local currency (PEN) in real-time to optimize your monthly budget.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SUBSCRIPTION PLANS -->
+  <section id="plans" class="section">
+    <div class="container">
+      <div class="text-block" style="text-align: center; margin-bottom: 3rem;">
+        <h2 id="plans-title">Subscription Plans</h2>
+        <p id="plans-desc">Select the plan that fits your needs. The initial hardware purchase applies to both plans.</p>
+      </div>
+      
+      <div class="pricing-grid two-cards">
+        <div class="pricing-card">
+          <h3 id="plan-1-title">Free Plan</h3>
+          <div class="pricing-price">S/ 0<span id="plan-1-period">/month</span></div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f1">Real-time monitoring</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f2">Critical security alerts</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f3">Access to technical directory</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f4">Basic expense estimation</span></li>
+          </ul>
+        </div>
+        
+        <div class="pricing-card popular">
+          <div class="popular-badge" id="plan-popular">Recommended</div>
+          <h3 id="plan-2-title">Pro Plan</h3>
+          <div class="pricing-price">S/ 35<span id="plan-2-period">/month</span></div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f1">Multi-Meter Manager (Buildings)</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f2">Comparisons of multiple points</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f3">Detailed consolidated reports</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f4">Advanced consumption history (12 months)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- AVAILABLE COUNTRIES -->
+  <section id="countries" class="section">
+    <div class="container grid-two-cols">
+      <div class="text-block">
+        <h2 id="countries-title">Available Countries</h2>
+        <p id="countries-desc">Currently, <strong>SmartGN</strong> is available in <strong>Peru</strong>, driving energy digitalization and safety for over 2.4 million connections.</p>
+      </div>
+      <div class="flag-block">
+       <img src="assets/peru.png" id="flag-image-alt" alt="Flag of Peru" class="flag-img" />
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SERVICE REGIONS -->
+  <section id="regions" class="section">
+    <div class="container grid-two-cols">
+      <div class="regions-badges">
+        <div class="region-card">
+          <i class="fa-solid fa-city"></i>
+          <span id="reg-1-title">Metropolitan Lima</span>
+          <small id="reg-1-sub">Residential & Multi-Meter</small>
+        </div>
+        <div class="region-card">
+          <i class="fa-solid fa-anchor"></i>
+          <span id="reg-2-title">Callao</span>
+          <small id="reg-2-sub">Commercial & Condominiums</small>
+        </div>
+        <div class="region-card">
+          <i class="fa-solid fa-industry"></i>
+          <span id="reg-3-title">Ica Region</span>
+          <small id="reg-3-sub">Network Coverage & Pilots</small>
+        </div>
+        <div class="region-card">
+          <i class="fa-solid fa-network-wired"></i>
+          <span id="reg-4-title">Urban Zones</span>
+          <small id="reg-4-sub">National Expansion</small>
+        </div>
+      </div>
+
+      <div class="text-block">
+        <h2 id="regions-title">Reach Regions</h2>
+        <p id="regions-desc">Strategic network coverage zones where we guarantee continuous telemetry and access to a technical directory.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ABOUT US AND TEAM -->
+  <section id="about-us" class="section">
+    <div class="container about-centered">
+      <h2 id="about-title">About Us</h2>
+      <p id="about-desc">In fast-growing cities where safety and resource control are top priorities, <strong>SmartGN</strong> (developed by <em>Ventrax</em>) centralizes natural gas supply management for homes, businesses, and buildings. We use IoT sensors and real-time telemetry to track consumption, monitor valve states, dispatch critical alerts, and connect users with verified technicians.</p>
+      <img src="assets/acercanosotros.avif" id="about-image-alt" alt="Monitoring and metrics dashboard" class="about-main-img" />
+
+      <div class="team-section">
+        <h3 id="team-title">Team Members</h3>
+        <div class="team-row">
+          <img src="assets/integrante1.png" id="team-image-1-alt" alt="Team member 1" class="team-member" />
+          <img src="assets/integrante2.png" id="team-image-2-alt" alt="Team member 2" class="team-member" />
+          <img src="assets/integrante3.png" id="team-image-3-alt" alt="Team member 3" class="team-member" />
+          <img src="assets/integrante4.png" id="team-image-4-alt" alt="Team member 4" class="team-member" />
+          <img src="assets/integrante5.png" id="team-image-5-alt" alt="Team member 5" class="team-member" />
+          <img src="assets/integrante6.png" id="team-image-6-alt" alt="Team member 6" class="team-member" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <main id="contracting-page" hidden>
+    <!-- CONTRACTING AND INSTALLATION -->
+    <section id="request-installation" class="section">
+      <div class="container">
+        <div class="text-block" style="text-align: center; margin-bottom: 3rem;">
+          <h2 id="contracting-title">Contracting & Installation Form</h2>
+          <p id="contracting-desc">Enter your details to request a device and arrange an installation.</p>
+        </div>
+
+        <div class="checkout-grid">
+          <!-- Left column: request form -->
+          <div class="checkout-form-container">
+            <div class="checkout-form" id="checkout-form" role="form" aria-label="Installation request">
+
+              <!-- Contact information -->
+              <h3 id="form-contact-title">1. Contact Information</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-fname" id="label-fname">First Name</label>
+                  <input type="text" id="input-fname" name="firstName" autocomplete="given-name" placeholder="e.g. John" required>
+                </div>
+                <div class="form-group">
+                  <label for="input-lname" id="label-lname">Last Name</label>
+                  <input type="text" id="input-lname" name="lastName" autocomplete="family-name" placeholder="e.g. Smith" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-email" id="label-email">Email Address</label>
+                  <input type="email" id="input-email" name="email" autocomplete="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="input-phone" id="label-phone">Phone Number</label>
+                  <input type="tel" id="input-phone" name="phone" autocomplete="tel" placeholder="+1 555 555 5555" required>
+                </div>
+              </div>
+
+              <!-- Installation address -->
+              <h3 id="form-location-title" style="margin-top: 2rem;">2. Installation Address</h3>
+              <div class="form-group">
+                <label for="input-address" id="label-address">Full Address</label>
+                <input type="text" id="input-address" name="address" autocomplete="street-address" placeholder="123 Main St, Apt 4" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-city" id="label-city">City / District</label>
+                  <input type="text" id="input-city" name="city" autocomplete="address-level2" placeholder="e.g. Miraflores, Lima" required>
+                </div>
+                <div class="form-group">
+                  <label for="input-zip" id="label-zip">Zip / Postal Code</label>
+                  <input type="text" id="input-zip" name="postalCode" autocomplete="postal-code" placeholder="e.g. 15074" required>
+                </div>
+              </div>
+
+              <h3 id="form-payment-title" style="margin-top: 2rem;">3. Confirmation</h3>
+              <p class="form-demo-note" id="form-demo-note">This site does not receive requests or process payments yet. Do not enter card details.</p>
+
+              <div class="form-group">
+                <label for="input-cardname" id="label-cardname">Name on card</label>
+                <input type="text" id="input-cardname" name="cardName" autocomplete="cc-name" placeholder="JOHN SMITH" required>
+              </div>
+              <div class="form-group">
+                <label for="input-cardnumber" id="label-cardnumber">Card number</label>
+                <input type="text" id="input-cardnumber" name="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-exp" id="label-exp">Expiration</label>
+                  <input type="text" id="input-exp" name="cardExpiration" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                  <label for="input-cvv" id="label-cvv">Security code</label>
+                  <input type="password" id="input-cvv" name="cardSecurityCode" inputmode="numeric" autocomplete="cc-csc" placeholder="CVV" maxlength="4" required>
+                </div>
+              </div>
+
+              <button type="button" class="btn-primary" id="btn-submit-order" style="width: 100%; margin-top: 1.5rem; justify-content: center; font-size: 1.2rem;">Request Installation</button>
+              <p class="form-status" id="form-status" role="status" aria-live="polite" hidden>This form is not connected yet. No request was sent and your details were not shared.</p>
+            </div>
+          </div>
+
+          <!-- Right column: order summary -->
+          <div class="checkout-summary">
+            <h3 id="summary-title">Order Summary</h3>
+            <div class="summary-line">
+              <span id="summary-item-1">SmartGN IoT Device</span>
+              <span>S/ 200.00</span>
+            </div>
+            <div class="summary-line">
+              <span id="summary-item-2">Technical Installation Service</span>
+              <span>S/ 50.00</span>
+            </div>
+            <hr class="summary-divider">
+            <div class="summary-line total-line">
+              <span id="summary-total-label">Estimated total</span>
+              <span>S/ 250.00</span>
+            </div>
+            <p id="summary-note" class="summary-note">These amounts are estimates. This page does not process payments or send requests yet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p id="footer-copy">© 2026 SmartGN by Ventrax. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
