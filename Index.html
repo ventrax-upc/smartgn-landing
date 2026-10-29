@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartGN | Gestión y Monitoreo Inteligente de Gas Natural</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#inicio" class="brand" aria-label="SmartGN Inicio">
+        <img src="assets/newlogo.png" alt="Logo Ventrax SmartGN" class="brand-logo" />
+        <span class="brand-name">Smart<span>GN</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#inicio" id="nav-home">Inicio</a>
+        <a href="#producto" id="nav-product">Producto</a>
+        <a href="#nosotros" id="nav-about">Nosotros</a>
+        <a href="#planes" id="nav-plans">Planes</a>
+        <a href="#paises" id="nav-countries">Países</a>
+        <a href="#regiones" id="nav-regions">Regiones</a>
+        <a href="#contratacion" id="nav-contracting">Contratación</a>
+      </nav>
+
+      <button id="lang-btn" class="lang-badge" aria-label="Cambiar idioma">ES</button>
+    </div>
+  </header>
+
+  <!-- HERO CAROUSEL -->
+  <section id="inicio" class="hero-carousel">
+    <div class="carousel-track" id="carousel-track">
+      
+      <!-- Slide 1: Hero Principal -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1 id="hero-title">
+            Gestión y Monitoreo de<br />
+            Suministro de Gas Natural<br />
+            en Tiempo Real
+          </h1>
+          <p class="hero-subtitle" id="hero-sub">Iníciate ahora</p>
+          <p class="hero-cta-text" id="hero-cta">Control, Seguridad y Telemetría IoT</p>
+          <a href="#contratacion" class="btn-primary" id="btn-redirect">
+            Solicitar Instalación <i class="fa-solid fa-arrow-down"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 2: Pregunta 1 -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2 id="prod-q1-title" class="alt-typography slide-title">¿Qué hacemos?</h2>
+          <p id="prod-q1-desc" class="slide-desc">Digitalizamos la gestión tradicional del gas natural mediante infraestructura IoT avanzada. Conectamos tus medidores físicos a una plataforma en la nube altamente escalable, capaz de procesar telemetría de consumo, presión y estado de válvulas en tiempo real.</p>
+        </div>
+      </div>
+
+      <!-- Slide 3: Pregunta 2 -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2 id="prod-q2-title" class="alt-typography slide-title">¿Cómo solucionamos tu problema?</h2>
+          <p id="prod-q2-desc" class="slide-desc">Eliminamos la incertidumbre en tus facturas y los tiempos de reacción lentos ante incidentes. Recibirás alertas inmediatas por correo, SMS o WhatsApp ante cualquier anomalía o posible fuga, y podrás visualizar tu gasto en Soles antes de fin de mes.</p>
+        </div>
+      </div>
+
+      <!-- Slide 4: Pregunta 3 -->
+      <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h2 id="prod-q3-title" class="alt-typography slide-title">¿Por qué confiar en nosotros?</h2>
+          <p id="prod-q3-desc" class="slide-desc">SmartGN es un ecosistema desarrollado por Ventrax, fundamentado en arquitecturas limpias, cifrado de datos extremo a extremo y alta disponibilidad (99.5%). Además, integramos un directorio centralizado de técnicos verificados listos para asistirte.</p>
+        </div>
+      </div>
+
+    </div>
+    <button class="carousel-btn prev" id="carousel-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-btn next" id="carousel-next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+  </section>
+
+  <!-- CARACTERÍSTICAS TÉCNICAS -->
+  <section id="producto" class="section" style="padding-top: 4rem;">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fa-solid fa-microchip"></i>
+          <h4 id="feat-1-title">Hardware IoT Preciso</h4>
+          <p id="feat-1-desc">Sensores de alta tecnología instalados por expertos que miden la presión y el volumen de gas de forma ininterrumpida.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h4 id="feat-2-title">Prevención de Riesgos</h4>
+          <p id="feat-2-desc">El sistema detecta anomalías y fugas en segundos, enviando alertas inmediatas a tu correo, SMS o WhatsApp.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-chart-pie"></i>
+          <h4 id="feat-3-title">Ahorro y Control</h4>
+          <p id="feat-3-desc">Visualiza tus métricas convertidas a Soles (PEN) en tiempo real para optimizar tu presupuesto mensual y evitar cobros excesivos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ACERCA DE NOSOTROS E INTEGRANTES -->
+  <section id="nosotros" class="section">
+    <div class="container about-centered">
+      <h2 id="about-title">Acerca de Nosotros</h2>
+      <p id="about-desc">
+        En ciudades de alto crecimiento donde la seguridad y el control de recursos son prioritarios, 
+        <strong>SmartGN</strong> (desarrollado por <em>Ventrax</em>) surge para centralizar la gestión 
+        del suministro de gas natural en hogares, comercios y edificios. Utilizamos sensores IoT y 
+        telemetría en tiempo real para supervisar el consumo, monitorear el estado de válvulas, 
+        enviar alertas críticas y conectar a los usuarios con técnicos verificados.
+      </p>
+      <img src="assets/image_e2745d.jpg" alt="Panel de control y gestión de métricas" class="about-main-img" />
+
+      <div class="team-section">
+        <h3 id="team-title">Integrantes</h3>
+        <div class="team-row">
+          <img src="assets/integrante1.png" alt="Integrante 1" class="team-member" />
+          <img src="assets/integrante2.png" alt="Integrante 2" class="team-member" />
+          <img src="assets/integrante3.png" alt="Integrante 3" class="team-member" />
+          <img src="assets/integrante4.png" alt="Integrante 4" class="team-member" />
+          <img src="assets/integrante5.png" alt="Integrante 5" class="team-member" />
+          <img src="assets/integrante6.png" alt="Integrante 6" class="team-member" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PLANES DE PAGO -->
+  <section id="planes" class="section">
+    <div class="container">
+      <div class="text-block" style="text-align: center; margin-bottom: 3rem;">
+        <h2 id="plans-title">Planes de Suscripción</h2>
+        <p id="plans-desc">Selecciona el plan que se adapte a tu necesidad. La compra inicial de hardware aplica a ambos planes.</p>
+      </div>
+      
+      <div class="pricing-grid two-cards">
+        <div class="pricing-card">
+          <h3 id="plan-1-title">Plan Free</h3>
+          <div class="pricing-price">S/ 0<span>/mes</span></div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f1">Monitoreo en tiempo real</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f2">Alertas críticas de seguridad</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f3">Acceso a directorio técnico</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-1-f4">Estimación básica de gasto</span></li>
+          </ul>
+        </div>
+        
+        <div class="pricing-card popular">
+          <div class="popular-badge" id="plan-popular">Recomendado</div>
+          <h3 id="plan-2-title">Plan Pro</h3>
+          <div class="pricing-price">S/ 35<span>/mes</span></div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f1">Gestor Multi-Medidor (Edificios)</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f2">Comparativas de múltiples puntos</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f3">Reportes consolidados detallados</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f4">Historial avanzado de consumo (12 meses)</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PAÍSES DISPONIBLES -->
+  <section id="paises" class="section">
+    <div class="container grid-two-cols">
+      <div class="text-block">
+        <h2 id="countries-title">Países Disponibles</h2>
+        <p id="countries-desc">
+          Actualmente <strong>SmartGN</strong> está disponible en <strong>Perú</strong>, impulsando la 
+          digitalización y seguridad energética de más de 2,4 millones de conexiones.
+        </p>
+      </div>
+      <div class="flag-block">
+       <img src="assets/peru.png" alt="Bandera del Perú" class="flag-img" />
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- REGIONES DE ALCANCE -->
+  <section id="regiones" class="section">
+    <div class="container grid-two-cols">
+      <div class="regions-badges">
+        <div class="region-card">
+          <i class="fa-solid fa-city"></i>
+          <span id="reg-1-title">Lima Metropolitana</span>
+          <small id="reg-1-sub">Residencial & Multi-Medidor</small>
+        </div>
+        <div class="region-card">
+          <i class="fa-solid fa-anchor"></i>
+          <span id="reg-2-title">Callao</span>
+          <small id="reg-2-sub">Comercios & Condominios</small>
+        </div>
+        <div class="region-card">
+          <i class="fa-solid fa-industry"></i>
+          <span id="reg-3-title">Región Ica</span>
+          <small id="reg-3-sub">Cobertura de Red & Pilotos</small>
+        </div>
+        <div class="region-card">
+          <i class="fa-solid fa-network-wired"></i>
+          <span id="reg-4-title">Zonas Urbanas</span>
+          <small id="reg-4-sub">Expansión Nacional</small>
+        </div>
+      </div>
+
+      <div class="text-block">
+        <h2 id="regions-title">Regiones de Alcance</h2>
+        <p id="regions-desc">
+          Zonas estratégicas con cobertura de red donde garantizamos telemetría continua y acceso a un directorio de técnicos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PROCESO DE CONTRATACIÓN Y CHECKOUT -->
+  <section id="contratacion" class="section">
+    <div class="container">
+      <div class="text-block" style="text-align: center; margin-bottom: 3rem;">
+        <h2 id="contracting-title">Formulario de Contratación e Instalación</h2>
+        <p id="contracting-desc">Completa tus datos para solicitar el dispositivo, procesar el pago y agendar la instalación.</p>
+      </div>
+      
+      <div class="checkout-grid">
+        <!-- Columna Izquierda: Formulario -->
+        <div class="checkout-form-container">
+          <form action="#" class="checkout-form" onsubmit="event.preventDefault();">
+            
+            <!-- Contacto -->
+            <h3 id="form-contact-title">1. Información de Contacto</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname" id="label-fname">Nombres</label>
+                <input type="text" id="input-fname" placeholder="Ej. Juan" required>
+              </div>
+              <div class="form-group">
+                <label for="lname" id="label-lname">Apellidos</label>
+                <input type="text" id="input-lname" placeholder="Ej. Pérez" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email" id="label-email">Correo Electrónico</label>
+                <input type="email" id="input-email" placeholder="juan@ejemplo.com" required>
+              </div>
+              <div class="form-group">
+                <label for="phone" id="label-phone">Teléfono</label>
+                <input type="tel" id="input-phone" placeholder="+51 999 999 999" required>
+              </div>
+            </div>
+
+            <!-- Ubicación -->
+            <h3 id="form-location-title" style="margin-top: 2rem;">2. Dirección de Instalación</h3>
+            <div class="form-group">
+              <label for="address" id="label-address">Dirección completa</label>
+              <input type="text" id="input-address" placeholder="Av. Principal 123, Dpto 4" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city" id="label-city">Ciudad / Distrito</label>
+                <input type="text" id="input-city" placeholder="Ej. Miraflores, Lima" required>
+              </div>
+              <div class="form-group">
+                <label for="zip" id="label-zip">Código Postal</label>
+                <input type="text" id="input-zip" placeholder="Ej. 15074" required>
+              </div>
+            </div>
+
+            <!-- Pago Niubiz -->
+            <h3 id="form-payment-title" style="margin-top: 2rem;">3. Método de Pago Seguro (Niubiz)</h3>
+            <div class="form-group">
+              <label for="cardname" id="label-cardname">Nombre en la tarjeta</label>
+              <input type="text" id="input-cardname" placeholder="JUAN PEREZ" required>
+            </div>
+            <div class="form-group">
+              <label for="cardnumber" id="label-cardnumber">Número de tarjeta</label>
+              <input type="text" id="input-cardnumber" placeholder="0000 0000 0000 0000" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="exp" id="label-exp">Vencimiento</label>
+                <input type="text" id="input-exp" placeholder="MM/AA" required>
+              </div>
+              <div class="form-group">
+                <label for="cvv" id="label-cvv">CVV</label>
+                <input type="text" id="input-cvv" placeholder="123" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" id="btn-submit-order" style="width: 100%; margin-top: 2.5rem; justify-content: center; font-size: 1.2rem;">
+              Pagar y Solicitar Instalación
+            </button>
+          </form>
+        </div>
+
+        <!-- Columna Derecha: Resumen -->
+        <div class="checkout-summary">
+          <h3 id="summary-title">Resumen del Pedido</h3>
+          <div class="summary-line">
+            <span id="summary-item-1">Dispositivo IoT SmartGN</span>
+            <span>S/ 200.00</span>
+          </div>
+          <div class="summary-line">
+            <span id="summary-item-2">Servicio de Instalación Técnica</span>
+            <span>S/ 50.00</span>
+          </div>
+          <hr class="summary-divider">
+          <div class="summary-line total-line">
+            <span id="summary-total-label">Total a Pagar</span>
+            <span>S/ 250.00</span>
+          </div>
+          <p id="summary-note" class="summary-note">
+            Al procesar el pago, autorizas la creación de tu cuenta en la plataforma y la asignación de un instalador. El cargo se realizará de manera encriptada y segura a través de Niubiz.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p id="footer-copy">© 2026 SmartGN por Ventrax. Todos los derechos reservados.</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook" class="social-icon fb"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="X (Twitter)" class="social-icon tw"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" aria-label="Instagram" class="social-icon ig"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
