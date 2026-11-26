@@ -5,7 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.getElementById('primary-navigation');
   const homeView = document.getElementById('home-page');
   const contractingView = document.getElementById('contracting-page');
+  const legalView = document.getElementById('legal-page');
+  const legalRoutes = new Map([['#privacy-policy', 'privacy'], ['#terms-and-conditions', 'terms']]);
+  const teamVideo = document.getElementById('team-video');
+  const teamVideoPlay = document.getElementById('team-video-play');
+  teamVideoPlay.disabled = !teamVideo.dataset.videoUrl;
+  teamVideoPlay.addEventListener('click', () => {
+    teamVideo.src = teamVideo.dataset.videoUrl + '?autoplay=1';
+    teamVideo.hidden = false;
+    teamVideoPlay.hidden = true;
+    teamVideo.focus();
+  });
   let currentLang = 'EN';
+  let renderCheckoutStatus = () => {};
+  let refreshCheckoutConnection = () => {};
   let setCarouselActive = () => {};
 
   try {
@@ -16,18 +29,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const translations = {
     ES: {
-      "page-title": "SmartGN | Gestión y Monitoreo Inteligente de Gas Natural",
-      "page-title-contracting": "Contratación e Instalación | SmartGN",
-      "page-description": "SmartGN monitorea el suministro de gas natural con telemetría IoT, alertas y control en tiempo real.",
+      "checkout-send-code": "Enviar código",
+      "checkout-code-label": "Código de seis dígitos",
+      "checkout-confirm-code": "Verificar correo",
+      "checkout-code-sent": "Revisa tu correo e ingresa el código de seis dígitos.",
+      "checkout-code-rate": "Espera un momento antes de solicitar otro código.",
+      "checkout-gateway-missing": "Esta página no tiene un Gateway configurado. Para probar en local, abre la Landing en http://localhost:5500.",
+      "checkout-gateway-offline": "La página de contratación no está conectada al API Gateway. Vuelve a intentarlo cuando el servicio esté disponible.",
+      "checkout-gateway-checking": "Comprobando la conexión al API Gateway…",
+      "checkout-file-gateway": "La página abierta como archivo no está conectada al API Gateway local. Abre la Landing en http://localhost:5500 para solicitar el código.",
+      "checkout-email-delivery-error": "No pudimos enviar el código. Comprueba que el Gateway esté disponible e inténtalo de nuevo.",
+      "checkout-code-invalid": "El código es incorrecto o ha vencido.",
+      "checkout-email-verified": "Correo verificado. Completa los datos de instalación.",
+      "checkout-start-payment": "Abrir pago de prueba",
+      "checkout-simulate-payment": "Simular pago local",
+      "checkout-card-title": "Niubiz Sandbox",
+      "checkout-card-note": "Usa una tarjeta de prueba. Este pago no genera un cargo real.",
+      "checkout-card-number": "Número de tarjeta",
+      "checkout-card-expiry": "Vencimiento",
+      "checkout-pay": "Pagar en Sandbox",
+      "checkout-niubiz-unknown": "El resultado del pago aún no está confirmado. No vuelvas a pagar esta orden.",
+      "checkout-niubiz-verifying": "Verificando el pago…",
+      "checkout-niubiz-retrying": "Abriendo un nuevo intento de pago…",
+      "checkout-niubiz-error": "No se pudo completar el paso de Niubiz. Revisa los datos de la tarjeta de prueba.",
+      "checkout-code-expired": "La verificación venció. Solicita un nuevo código.",
+      "page-title": "SmartGN · Monitoreo de gas natural en tiempo real",
+      "page-title-contracting": "SmartGN · Contratación",
+      "page-description": "Consulta tu consumo de gas natural en tiempo real, recibe alertas y solicita la instalación de tu medidor SmartGN.",
       "page-description-contracting": "Solicita la instalación de SmartGN para tu hogar, comercio o edificio.",
       "brand-label": "SmartGN Inicio",
-      "about-image-alt": "Panel de control y gestión de métricas",
-      "team-image-1-alt": "Integrante 1",
-      "team-image-2-alt": "Integrante 2",
-      "team-image-3-alt": "Integrante 3",
-      "team-image-4-alt": "Integrante 4",
-      "team-image-5-alt": "Integrante 5",
-      "team-image-6-alt": "Integrante 6",
       "flag-image-alt": "Bandera del Perú",
       "nav-product": "Producto",
       "nav-about": "Nosotros",
@@ -65,10 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
       "plan-popular": "Recomendado",
       "plan-2-title": "Plan Pro",
       "plan-2-period": "/mes",
-      "plan-2-f1": "Gestor Multi-Medidor (Edificios)",
       "plan-2-f2": "Comparativas de múltiples puntos",
       "plan-2-f3": "Reportes consolidados detallados",
       "plan-2-f4": "Historial avanzado de consumo (12 meses)",
+      "plan-2-f5": "Atención prioritaria de tickets de soporte",
       "countries-title": "Países Disponibles",
       "countries-desc": "Actualmente <strong>SmartGN</strong> está disponible en <strong>Perú</strong>, impulsando la digitalización y seguridad energética de más de 2,4 millones de conexiones.",
       "regions-title": "Regiones de Alcance",
@@ -92,45 +122,59 @@ document.addEventListener('DOMContentLoaded', () => {
       "label-address": "Dirección completa",
       "label-city": "Ciudad / Distrito",
       "label-zip": "Código Postal",
-      "form-payment-title": "3. Confirmación",
-      "form-demo-note": "Este sitio todavía no recibe solicitudes ni procesa pagos. No ingreses datos de tarjeta.",
-      "form-status": "El formulario aún no está conectado. No se envió ninguna solicitud ni se compartieron tus datos.",
-      "label-cardname": "Nombre en la tarjeta",
-      "label-cardnumber": "Número de tarjeta",
-      "label-exp": "Vencimiento",
-      "label-cvv": "CVV",
-      "btn-submit-order": "Solicitar Instalación",
+      "btn-submit-order": "Continuar al pago",
       "summary-title": "Resumen del Pedido",
       "summary-item-1": "Dispositivo IoT SmartGN",
       "summary-item-2": "Servicio de Instalación Técnica",
       "summary-total-label": "Total referencial",
-      "summary-note": "Los importes son referenciales. Esta página aún no procesa pagos ni envía solicitudes.",
-      "input-fname": "Ej. Juan",
-      "input-lname": "Ej. Pérez",
+      "checkout-loading": "Creando tu orden…",
+      "checkout-error": "No se pudo completar la operación. Vuelve a intentarlo.",
+      "checkout-pending": "Orden {id} por {amount}. El pago está pendiente.",
+      "checkout-local": "Orden de prueba {id} por {amount}. El pago se confirma mediante el simulador local.",
+      "checkout-confirmed": "Pago confirmado. El enlace de activación se enviará al correo registrado si corresponde.",
+      "checkout-success-title": "Pago confirmado",
+      "checkout-success-email-message": "Enviaremos los pasos de activación a {email}. Volverás al inicio en 10 segundos.",
+      "checkout-success-home": "Volver al inicio",
+      "checkout-declined": "El pago fue rechazado.",
+      "input-fname": "Andrea",
+      "input-lname": "García",
       "input-email": "juan@ejemplo.com",
-      "input-phone": "+51 999 999 999",
-      "input-address": "Av. Principal 123, Dpto 4",
-      "input-city": "Ej. Miraflores, Lima",
-      "input-zip": "Ej. 15074",
-      "input-cardname": "JUAN PEREZ",
-      "input-cardnumber": "0000 0000 0000 0000",
-      "input-exp": "MM/AA",
-      "input-cvv": "123",
+      "input-phone": "+51 912 345 678",
+      "input-address": "Av. José Larco 345, Dpto. 402",
+      "input-city": "Miraflores, Lima",
+      "input-zip": "15074",
       "footer-copy": `© ${new Date().getFullYear()} SmartGN por Ventrax. Todos los derechos reservados.`
     },
     EN: {
-      "page-title": "SmartGN | Real-Time Natural Gas Management and Monitoring",
-      "page-title-contracting": "Contracting and Installation | SmartGN",
-      "page-description": "SmartGN monitors natural gas supply with real-time IoT telemetry, alerts, and control.",
+      "checkout-send-code": "Send code",
+      "checkout-code-label": "Six-digit code",
+      "checkout-confirm-code": "Verify email",
+      "checkout-code-sent": "Check your email for the six-digit code.",
+      "checkout-code-rate": "Wait a moment before requesting another code.",
+      "checkout-gateway-missing": "This page has no Gateway configured. To test locally, open the Landing at http://localhost:5500.",
+      "checkout-gateway-offline": "Checkout is not connected to the API Gateway. Try again when the service is available.",
+      "checkout-gateway-checking": "Checking the API Gateway connection…",
+      "checkout-file-gateway": "This file is not connected to the local API Gateway. Open the Landing at http://localhost:5500 to request a code.",
+      "checkout-email-delivery-error": "We could not send the code. Check that the Gateway is running and try again.",
+      "checkout-code-invalid": "The code is incorrect or expired.",
+      "checkout-email-verified": "Email verified. Complete the installation details.",
+      "checkout-start-payment": "Open test payment",
+      "checkout-simulate-payment": "Simulate local payment",
+      "checkout-card-title": "Niubiz Sandbox",
+      "checkout-card-note": "Use a test card. This payment will not charge real money.",
+      "checkout-card-number": "Card number",
+      "checkout-card-expiry": "Expiry date",
+      "checkout-pay": "Pay in Sandbox",
+      "checkout-niubiz-unknown": "The payment result is still unconfirmed. Do not pay this order again.",
+      "checkout-niubiz-verifying": "Verifying payment…",
+      "checkout-niubiz-retrying": "Opening a new payment attempt…",
+      "checkout-niubiz-error": "Niubiz could not complete this step. Check the test card details.",
+      "checkout-code-expired": "Verification expired. Request a new code.",
+      "page-title": "SmartGN · Real-Time Natural Gas Monitoring",
+      "page-title-contracting": "SmartGN · Checkout",
+      "page-description": "Track your natural gas consumption in real time, receive alerts, and request installation of your SmartGN meter.",
       "page-description-contracting": "Request SmartGN installation for your home, business, or building.",
       "brand-label": "SmartGN Home",
-      "about-image-alt": "Monitoring and metrics dashboard",
-      "team-image-1-alt": "Team member 1",
-      "team-image-2-alt": "Team member 2",
-      "team-image-3-alt": "Team member 3",
-      "team-image-4-alt": "Team member 4",
-      "team-image-5-alt": "Team member 5",
-      "team-image-6-alt": "Team member 6",
       "flag-image-alt": "Flag of Peru",
       "nav-product": "Product",
       "nav-about": "About Us",
@@ -168,10 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
       "plan-popular": "Recommended",
       "plan-2-title": "Pro Plan",
       "plan-2-period": "/month",
-      "plan-2-f1": "Multi-Meter Manager (Buildings)",
       "plan-2-f2": "Comparisons of multiple points",
       "plan-2-f3": "Detailed consolidated reports",
       "plan-2-f4": "Advanced consumption history (12 months)",
+      "plan-2-f5": "Priority handling for support tickets",
       "countries-title": "Available Countries",
       "countries-desc": "Currently, <strong>SmartGN</strong> is available in <strong>Peru</strong>, driving energy digitalization and safety for over 2.4 million connections.",
       "regions-title": "Reach Regions",
@@ -195,30 +239,27 @@ document.addEventListener('DOMContentLoaded', () => {
       "label-address": "Full Address",
       "label-city": "City / District",
       "label-zip": "Zip / Postal Code",
-      "form-payment-title": "3. Confirmation",
-      "form-demo-note": "This site does not receive requests or process payments yet. Do not enter card details.",
-      "form-status": "This form is not connected yet. No request was sent and your details were not shared.",
-      "label-cardname": "Name on card",
-      "label-cardnumber": "Card number",
-      "label-exp": "Expiration",
-      "label-cvv": "Security code",
-      "btn-submit-order": "Request Installation",
+      "btn-submit-order": "Continue to payment",
       "summary-title": "Order Summary",
       "summary-item-1": "SmartGN IoT Device",
       "summary-item-2": "Technical Installation Service",
       "summary-total-label": "Estimated total",
-      "summary-note": "These amounts are estimates. This page does not process payments or send requests yet.",
-      "input-fname": "e.g. John",
-      "input-lname": "e.g. Smith",
+      "checkout-loading": "Creating your order…",
+      "checkout-error": "The operation could not be completed. Please try again.",
+      "checkout-pending": "Order {id} for {amount}. Payment is pending.",
+      "checkout-local": "Test order {id} for {amount}. Payment is confirmed through the local simulator.",
+      "checkout-confirmed": "Payment confirmed. An activation link will be sent to the registered email if applicable.",
+      "checkout-success-title": "Payment confirmed",
+      "checkout-success-email-message": "We’ll send activation instructions to {email}. You’ll return to the home page in 10 seconds.",
+      "checkout-success-home": "Back to home",
+      "checkout-declined": "Payment was declined.",
+      "input-fname": "Andrea",
+      "input-lname": "García",
       "input-email": "john@example.com",
-      "input-phone": "+1 555 555 5555",
-      "input-address": "123 Main St, Apt 4",
-      "input-city": "e.g. Miraflores, Lima",
-      "input-zip": "e.g. 15074",
-      "input-cardname": "JOHN SMITH",
-      "input-cardnumber": "0000 0000 0000 0000",
-      "input-exp": "MM/YY",
-      "input-cvv": "123",
+      "input-phone": "+51 912 345 678",
+      "input-address": "Av. José Larco 345, Dpto. 402",
+      "input-city": "Miraflores, Lima",
+      "input-zip": "15074",
       "footer-copy": `© ${new Date().getFullYear()} SmartGN by Ventrax. All rights reserved.`
     }
   };
@@ -240,33 +281,40 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyLanguage(language) {
     currentLang = language;
     document.documentElement.lang = language.toLowerCase();
+    teamVideo.title = language === 'ES' ? 'Sobre el equipo de SmartGN' : 'About the SmartGN team';
+    teamVideoPlay.setAttribute('aria-label', language === 'ES'
+      ? (teamVideoPlay.disabled ? 'Video del equipo sin configurar' : 'Reproducir el video del equipo')
+      : (teamVideoPlay.disabled ? 'Team video not configured' : 'Play the team video'));
+    const labels = language === 'ES'
+      ? ['Producto', 'Planes', 'Países', 'Regiones', 'Nosotros', 'Contratar', 'Política de privacidad', 'Términos y condiciones', 'Acepto la', 'y los', 'Volver al inicio']
+      : ['Product', 'Plans', 'Countries', 'Regions', 'About Us', 'Get started', 'Privacy Policy', 'Terms & Conditions', 'I accept the', 'and the', 'Back to home'];
+    const labelIds = ['footer-product', 'footer-plans', 'footer-countries', 'footer-regions', 'footer-about', 'footer-contracting',
+      'footer-privacy', 'footer-terms', 'checkout-legal-prefix', 'checkout-legal-and', 'legal-back'];
+    labelIds.forEach((id, index) => { document.getElementById(id).textContent = labels[index]; });
+    document.getElementById('checkout-privacy-link').textContent = labels[6];
+    document.getElementById('footer-summary').textContent = language === 'ES'
+      ? 'Monitorea tu consumo de gas natural y recibe alertas de tu medidor SmartGN.'
+      : 'Monitor your natural gas consumption and receive alerts from your SmartGN meter.';
+    document.getElementById('checkout-terms-link').textContent = labels[7];
 
     for (const [key, value] of Object.entries(translations[language])) {
       const element = document.getElementById(key);
-      if (!element) continue;
+      if (!element || element instanceof HTMLMetaElement) continue;
 
       if (element instanceof HTMLInputElement) {
         element.placeholder = value;
-      } else if (element instanceof HTMLMetaElement) {
-        element.content = value;
-      } else if (element instanceof HTMLImageElement) {
-        element.alt = value;
       } else {
         element.innerHTML = value;
       }
     }
 
+    renderCheckoutStatus();
     const brandLink = document.getElementById('brand-link');
     if (brandLink) {
       brandLink.setAttribute('aria-label', translations[language]['brand-label']);
     }
 
-    const isContracting = window.location.hash === '#request-installation';
-    document.title = translations[language][isContracting ? 'page-title-contracting' : 'page-title'];
-    const pageDescription = document.getElementById('page-description');
-    if (pageDescription) {
-      pageDescription.content = translations[language][isContracting ? 'page-description-contracting' : 'page-description'];
-    }
+    renderPageContent();
 
     if (navLinks) {
       navLinks.setAttribute('aria-label', language === 'EN' ? 'Main navigation' : 'Navegación principal');
@@ -307,19 +355,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function renderLegalPage() {
+    const key = legalRoutes.get(location.hash);
+    if (!key) return;
+    const { title, sections } = smartgnLegal[currentLang][key];
+    document.title = 'SmartGN · ' + (key === 'privacy'
+      ? (currentLang === 'ES' ? 'Privacidad' : 'Privacy')
+      : (currentLang === 'ES' ? 'Términos' : 'Terms'));
+    document.getElementById('legal-title').textContent = title;
+    const content = document.getElementById('legal-content');
+    content.replaceChildren();
+    for (const [heading, body] of sections) {
+      const section = document.createElement('section');
+      const subtitle = document.createElement('h2');
+      const paragraph = document.createElement('p');
+      subtitle.textContent = heading;
+      paragraph.textContent = body;
+      section.append(subtitle, paragraph);
+      content.append(section);
+    }
+  }
+
+  function renderPageContent() {
+    const isContracting = location.hash === '#request-installation';
+    const copy = translations[currentLang];
+    document.title = copy[isContracting ? 'page-title-contracting' : 'page-title'];
+    document.getElementById('page-description').content =
+      copy[isContracting ? 'page-description-contracting' : 'page-description'];
+    renderLegalPage();
+  }
+
   function renderRoute(scrollTarget = null) {
     const isContracting = window.location.hash === '#request-installation';
-    homeView.hidden = isContracting;
+    if (isContracting) refreshCheckoutConnection();
+    const isLegal = legalRoutes.has(location.hash);
+    const isHome = !isContracting && !isLegal;
+    homeView.hidden = !isHome;
     contractingView.hidden = !isContracting;
-    setCarouselActive(!isContracting);
-    document.title = translations[currentLang][isContracting ? 'page-title-contracting' : 'page-title'];
-
-    const pageDescription = document.getElementById('page-description');
-    if (pageDescription) {
-      pageDescription.content = translations[currentLang][isContracting ? 'page-description-contracting' : 'page-description'];
+    legalView.hidden = !isLegal;
+    navLinks.hidden = !isHome;
+    menuToggle.hidden = !isHome;
+    document.getElementById('nav-contracting').hidden = !isHome;
+    document.getElementById('footer-navigation').hidden = !isHome;
+    document.querySelector('.footer').classList.toggle('footer--compact', !isHome);
+    if (!isHome && !teamVideo.hidden) {
+      teamVideo.removeAttribute('src');
+      teamVideo.hidden = true;
+      teamVideoPlay.hidden = false;
     }
-
-    if (isContracting) {
+    setCarouselActive(isHome);
+    renderPageContent();
+    if (!isHome) {
       window.scrollTo({ top: 0, behavior: 'auto' });
       return;
     }
@@ -384,21 +470,426 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const checkoutForm = document.getElementById('checkout-form');
   if (checkoutForm) {
-    const submitOrderButton = document.getElementById('btn-submit-order');
-    submitOrderButton?.addEventListener('click', () => {
-      const invalidField = Array.from(checkoutForm.querySelectorAll('input[required]'))
-        .find((field) => !field.checkValidity());
-      if (invalidField) {
-        invalidField.reportValidity();
+    const submit = document.getElementById('btn-submit-order');
+    const status = document.getElementById('form-status');
+    const emailForm = document.getElementById('checkout-email-form');
+    const codeForm = document.getElementById('checkout-code-form');
+    const emailInput = document.getElementById('input-email');
+    const codeInput = document.getElementById('checkout-code');
+    const sendCode = document.getElementById('checkout-send-code');
+    const confirmCode = document.getElementById('checkout-confirm-code');
+    const emailStatus = document.getElementById('checkout-email-status');
+    const details = document.getElementById('checkout-details');
+    const phoneInput = document.getElementById('input-phone');
+    const startPayment = document.getElementById('checkout-start-payment');
+    const payment = document.getElementById('checkout-payment');
+    const pay = document.getElementById('checkout-pay');
+    const cardFields = [
+      ['card-number', 'niubiz-number', '0000 0000 0000 0000'],
+      ['card-expiry', 'niubiz-expiry', 'MM / YY'],
+      ['card-cvc', 'niubiz-cvc', 'CVV'],
+    ];
+    const directFile = location.protocol === 'file:';
+    const loopbackHosts = ['localhost', '127.0.0.1', '[::1]'];
+    const loopbackPage = loopbackHosts.includes(location.hostname);
+    const configuredGateway = checkoutForm.dataset.gatewayUrl.trim();
+    let gateway = '';
+    let local = false;
+    try {
+      const url = new URL(configuredGateway || (loopbackPage ? 'http://localhost:8000' : ''));
+      local = loopbackPage && loopbackHosts.includes(url.hostname);
+      if ((url.protocol === 'https:' || (local && url.protocol === 'http:'))
+        && !url.username && !url.password && url.pathname === '/' && !url.search && !url.hash) {
+        gateway = url.origin;
+      }
+    } catch {
+      // Checkout reports the missing Gateway through its existing status message.
+    }
+    const canConnect = !directFile && window.isSecureContext && Boolean(gateway);
+    let connection = 'checking';
+    let checkingConnection = false;
+    const inputs = [...checkoutForm.querySelectorAll('input:not([type="checkbox"])')];
+    const legalAccepted = document.getElementById('checkout-legal-accepted');
+    let attempt;
+    let order;
+    let session;
+    let cardElements;
+    let cardholder;
+    let payformScript;
+    let authorizationSubmitted = false;
+    let retryReady = false;
+    let declineTimer;
+    let challenge;
+    let verification;
+    let emailBusy = false;
+    let emailStatusKey = '';
+    let busy = false;
+    let statusKey = '';
+
+    renderCheckoutStatus = () => {
+      const messageKey = directFile ? 'checkout-file-gateway'
+        : !canConnect ? 'checkout-gateway-missing'
+        : connection === 'offline' ? 'checkout-gateway-offline'
+        : connection === 'checking' ? 'checkout-gateway-checking'
+        : emailStatusKey;
+      emailStatus.hidden = !messageKey;
+      emailStatus.textContent = translations[currentLang][messageKey] || '';
+      status.hidden = !statusKey;
+      if (!statusKey) return;
+      let message = translations[currentLang][statusKey];
+      if (order) {
+        const amount = new Intl.NumberFormat(currentLang === 'ES' ? 'es-PE' : 'en-PE', {
+          style: 'currency', currency: order.currency,
+        }).format(order.amount);
+        message = message.replace('{id}', order.id).replace('{amount}', amount);
+      }
+      status.textContent = message;
+    };
+
+    function updateControls() {
+      details.disabled = !verification;
+      codeForm.hidden = !challenge || Boolean(verification);
+      emailInput.readOnly = emailBusy || Boolean(verification);
+      sendCode.hidden = Boolean(verification);
+      const connected = canConnect && connection === 'online';
+      sendCode.disabled = !connected || emailBusy || !emailInput.validity.valid;
+      confirmCode.disabled = !connected || emailBusy;
+      submit.disabled = !connected || !verification || !legalAccepted.checked || busy || (Boolean(order) && !retryReady)
+        || inputs.some(input => !input.value.trim() || !input.validity.valid);
+      const simulatedCheckout = session?.provider === 'LOCAL_TEST_DOUBLE';
+      startPayment.textContent = translations[currentLang][
+        simulatedCheckout ? 'checkout-simulate-payment' : 'checkout-start-payment'];
+      startPayment.hidden = order?.status !== 'PENDING' || authorizationSubmitted || Boolean(cardElements)
+        || (simulatedCheckout && (!local || !session.localCheckoutAction));
+      startPayment.disabled = !connected || busy;
+      payment.hidden = !cardElements || order?.status !== 'PENDING';
+      pay.disabled = !connected || busy || authorizationSubmitted || !cardElements;
+      inputs.forEach((input) => { input.readOnly = busy || Boolean(attempt?.installationId); });
+      renderCheckoutStatus();
+    }
+
+    refreshCheckoutConnection = async () => {
+      if (!canConnect || checkingConnection) return;
+      checkingConnection = true;
+      try {
+        const response = await fetch(gateway + '/health', {
+          cache: 'no-store',
+          credentials: 'omit',
+          redirect: 'error',
+          signal: AbortSignal.timeout(5000),
+        });
+        const health = response.ok ? await response.json() : null;
+        connection = health?.status === 'UP' && health.service === 'api-gateway' ? 'online' : 'offline';
+      } catch {
+        connection = 'offline';
+      } finally {
+        checkingConnection = false;
+        updateControls();
+      }
+    };
+    window.setInterval(() => {
+      if (location.hash === '#request-installation' && document.visibilityState === 'visible') {
+        refreshCheckoutConnection();
+      }
+    }, 10000);
+
+    async function request(path, method, body, headers = {}) {
+      const response = await fetch(gateway + path, {
+        method,
+        credentials: 'omit',
+        redirect: 'error',
+        signal: AbortSignal.timeout(15000),
+        headers: body ? { 'Content-Type': 'application/json', ...headers } : headers,
+        body: body ? JSON.stringify(body) : undefined,
+      });
+      if (!response.ok) throw Object.assign(new Error('Checkout HTTP ' + response.status), { status: response.status });
+      return response.json();
+    }
+
+    let successTimer;
+    const successDialog = document.getElementById('checkout-success-dialog');
+    const goHome = () => {
+      window.location.replace(window.location.pathname + window.location.search + '#home');
+      window.location.reload();
+    };
+    successDialog.addEventListener('cancel', event => event.preventDefault());
+    document.getElementById('checkout-success-home').addEventListener('click', () => {
+      clearTimeout(successTimer);
+      goHome();
+    });
+
+    function displayOrder() {
+      if (order.status === 'CONFIRMED') {
+        statusKey = 'checkout-confirmed';
+        if (!successTimer) {
+          document.getElementById('checkout-success-email').textContent =
+            translations[currentLang]['checkout-success-email-message'].replace('{email}', emailInput.value.trim());
+          successDialog.showModal();
+          successTimer = setTimeout(goHome, 10000);
+        }
+      }
+      else if (order.status === 'DECLINED') {
+        statusKey = 'checkout-declined';
+        if (session?.provider === 'NIUBIZ_SANDBOX' && !declineTimer && !retryReady) {
+          declineTimer = setTimeout(() => {
+            declineTimer = undefined;
+            if (order.status !== 'DECLINED') return;
+            statusKey = '';
+            retryReady = true;
+            updateControls();
+          }, 5000);
+        }
+      }
+      else if (order.status === 'UNKNOWN' || authorizationSubmitted) statusKey = 'checkout-niubiz-unknown';
+      else if (session?.provider === 'NIUBIZ_SANDBOX') statusKey = '';
+      else statusKey = local ? 'checkout-local' : 'checkout-pending';
+    }
+
+    async function trackPayment(maxChecks) {
+      for (let check = 0; check < maxChecks; check++) {
+        await new Promise(resolve => setTimeout(resolve, 2500));
+        try {
+          order = await request('/api/v1/checkout/orders/' + order.id, 'GET', undefined, attempt.headers);
+          if (['CONFIRMED', 'DECLINED'].includes(order.status)) {
+            displayOrder();
+            updateControls();
+            return;
+          }
+        } catch {
+          // A temporary network failure does not allow a second authorization.
+        }
+      }
+    }
+
+    function loadPayform() {
+      // Payform allows one set of elements per SDK instance.
+      payformScript?.remove();
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        payformScript = script;
+        script.src = 'https://pocpaymentserve.s3.amazonaws.com/payform.min.js';
+        script.onload = () => window.payform ? resolve(window.payform) : reject(new Error('Payform missing'));
+        script.onerror = () => reject(new Error('Payform unavailable'));
+        document.head.append(script);
+      });
+    }
+
+    async function preparePayment() {
+      session = await request('/api/v1/checkout/orders/' + order.id + '/sessions',
+        'POST', undefined, attempt.headers);
+      if (session.provider !== 'NIUBIZ_SANDBOX') return;
+
+      retryReady = false;
+      order.status = 'PENDING';
+      authorizationSubmitted = false;
+      cardElements = undefined;
+      cardFields.forEach(([, id]) => document.getElementById(id).replaceChildren());
+      const payform = await loadPayform();
+      payform.setConfiguration({
+        sessionkey: session.sessionKey,
+        channel: 'web',
+        merchantid: session.merchantId,
+        purchasenumber: session.purchaseNumber,
+        amount: Number(session.amount).toFixed(2),
+        callbackurl: '',
+        language: currentLang.toLowerCase(),
+        font: 'https://fonts.googleapis.com/css?family=Montserrat:400&display=swap',
+      });
+      payment.hidden = false;
+      let deadline;
+      try {
+        const style = {
+          base: {
+            color: '#f8fafc', fontWeight: 400, fontFamily: "'Montserrat', sans-serif",
+            fontSize: '16px', fontSmoothing: 'antialiased',
+            placeholder: { color: '#64748b' }, autofill: { color: '#f8fafc' },
+          },
+          invalid: { color: '#b91c1c', '::placeholder': { color: '#b91c1c' } },
+        };
+        const initializeFields = Promise.all(cardFields.map(async ([type, id, placeholder]) => {
+          const element = await payform.createElement(type, { style, placeholder }, id);
+          await element.promise;
+          return element;
+        }));
+        const limit = new Promise((_, reject) => {
+          deadline = setTimeout(() => reject(new Error('Niubiz fields did not initialize')), 15000);
+        });
+        cardElements = await Promise.race([initializeFields, limit]);
+      } catch (error) {
+        cardFields.forEach(([, id]) => document.getElementById(id).replaceChildren());
+        throw error;
+      } finally {
+        clearTimeout(deadline);
+      }
+    }
+
+    emailInput.addEventListener('input', () => {
+      challenge = undefined;
+      codeInput.value = '';
+      emailStatusKey = '';
+      updateControls();
+    });
+
+    checkoutForm.addEventListener('input', updateControls);
+
+    phoneInput.addEventListener('input', () => {
+      const value = phoneInput.value.trim();
+      let digits = value.replace(/\D/g, '');
+      if (value.startsWith('+51') || (digits.length === 11 && digits.startsWith('51'))) {
+        digits = digits.slice(2);
+      }
+      const groups = digits.slice(0, 9).match(/.{1,3}/g);
+      phoneInput.value = groups ? '+51 ' + groups.join(' ') : '';
+    });
+
+    emailForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (sendCode.disabled || verification) return;
+      emailBusy = true;
+      updateControls();
+      try {
+        const email = emailInput.value.trim().toLowerCase();
+        challenge = await request('/api/v1/installations/email-verifications', 'POST', { email });
+        codeInput.value = '';
+        emailStatusKey = 'checkout-code-sent';
+      } catch (error) {
+        if (!error.status) refreshCheckoutConnection();
+        emailStatusKey = error.status === 429 ? 'checkout-code-rate' : 'checkout-email-delivery-error';
+      } finally {
+        emailBusy = false;
+        updateControls();
+        if (!codeForm.hidden) codeInput.focus();
+      }
+    });
+
+    codeForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!challenge || verification || emailBusy) return;
+      emailBusy = true;
+      updateControls();
+      try {
+        verification = await request('/api/v1/installations/email-verifications/confirm', 'POST', {
+          challengeId: challenge.challengeId, code: codeInput.value,
+        });
+        emailStatusKey = 'checkout-email-verified';
+      } catch (error) {
+        emailStatusKey = error.status === 422 ? 'checkout-code-invalid' : 'checkout-error';
+      } finally {
+        emailBusy = false;
+        updateControls();
+        if (verification) inputs[0].focus();
+      }
+    });
+
+    checkoutForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (submit.disabled) return;
+      if (retryReady) {
+        busy = true;
+        statusKey = 'checkout-niubiz-retrying';
+        updateControls();
+        try {
+          await preparePayment();
+          displayOrder();
+        } catch {
+          statusKey = 'checkout-niubiz-error';
+        } finally {
+          busy = false;
+          updateControls();
+        }
+        return;
+      }
+      for (const input of inputs) input.value = input.value.trim();
+      if (inputs.some((input) => !input.value) || !checkoutForm.reportValidity()) {
+        statusKey = 'checkout-error';
+        renderCheckoutStatus();
         return;
       }
 
-      const formStatus = document.getElementById('form-status');
-      if (!formStatus) return;
-
-      formStatus.textContent = translations[currentLang]['form-status'];
-      formStatus.hidden = false;
+      const { firstName, lastName, phone, address, city, postalCode } =
+        Object.fromEntries(new FormData(checkoutForm));
+      const email = emailInput.value.trim().toLowerCase();
+      attempt ??= {
+        key: crypto.randomUUID(),
+        headers: { 'X-Checkout-Secret': crypto.randomUUID() + crypto.randomUUID() },
+      };
+      busy = true;
+      statusKey = 'checkout-loading';
+      updateControls();
+      try {
+        attempt.installationId ??= (await request('/api/v1/installations/verified', 'POST', {
+          challengeId: verification.challengeId,
+          proof: verification.proof,
+          contact: { name: firstName + ' ' + lastName, email, phone: phone.replace(/\s/g, '') },
+          address: [address, city, postalCode].join(', '),
+        })).id;
+        order = await request('/api/v1/checkout/orders', 'POST', {
+          installationId: attempt.installationId, email, firstName, lastName,
+        }, { 'Idempotency-Key': attempt.key, ...attempt.headers });
+        cardholder = {
+          name: firstName, lastName, email, phoneNumber: phone.replace(/\s/g, ''),
+          alias: 'SmartGN test payment', currencyConversion: false, recurrence: false,
+        };
+        if (order.status === 'PENDING') await preparePayment();
+        displayOrder();
+        if (session?.provider === 'LOCAL_TEST_DOUBLE') void trackPayment(120);
+      } catch (error) {
+        if (error.status === 403 && !attempt.installationId) {
+          verification = undefined;
+          challenge = undefined;
+          emailStatusKey = 'checkout-code-expired';
+        }
+        statusKey = order ? 'checkout-niubiz-error' : 'checkout-error';
+      } finally {
+        busy = false;
+        updateControls();
+      }
     });
+
+    startPayment.addEventListener('click', async () => {
+      if (busy || order?.status !== 'PENDING') return;
+      busy = true;
+      updateControls();
+      try {
+        if (local && session?.provider === 'LOCAL_TEST_DOUBLE' && session.localCheckoutAction) {
+          order = await request('/api/v1/checkout/orders/' + order.id + '/sandbox-authorizations',
+            'POST', { transactionToken: session.localCheckoutAction }, attempt.headers);
+        } else {
+          await preparePayment();
+        }
+        displayOrder();
+      } catch {
+        statusKey = 'checkout-niubiz-error';
+      } finally {
+        busy = false;
+        updateControls();
+      }
+    });
+
+    pay.addEventListener('click', async () => {
+      if (busy || authorizationSubmitted || order?.status !== 'PENDING' || !cardElements) return;
+      busy = true;
+      updateControls();
+      try {
+        const data = await window.payform.createToken(cardElements, cardholder);
+        if (!data?.transactionToken) throw new Error('Niubiz transaction token missing');
+        authorizationSubmitted = true;
+        statusKey = 'checkout-niubiz-verifying';
+        renderCheckoutStatus();
+        order = await request('/api/v1/checkout/orders/' + order.id + '/sandbox-authorizations',
+          'POST', { transactionToken: data.transactionToken }, attempt.headers);
+        displayOrder();
+        if (order.status === 'UNKNOWN') void trackPayment(6);
+      } catch {
+        statusKey = authorizationSubmitted ? 'checkout-niubiz-unknown' : 'checkout-niubiz-error';
+        if (authorizationSubmitted) void trackPayment(6);
+      } finally {
+        busy = false;
+        updateControls();
+      }
+    });
+
+    updateControls();
   }
 
   applyLanguage(currentLang);
