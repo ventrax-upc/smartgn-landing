@@ -1,0 +1,24 @@
+# Based on the Ventrax AV4 report and aligned with the current checkout.
+Feature: Landing Page purchase and account activation start
+
+  Scenario: Submit installation purchase request successfully
+    Given the User is on the Landing Page
+    And the User verifies their email with a six-digit code
+    And the User enters valid contact and installation details and accepts both legal documents
+    And the system creates a provisional installation request and a payment order
+    When Billing verifies that the payment was approved
+    Then the Landing shows a payment confirmation modal with the registered email
+    And the Landing returns to the home page after 10 seconds
+    And the system sends a single purchase email with payment confirmation, an activation link, instructions and the electronic receipt PDF
+
+  Scenario: Keep payment disabled until the checkout form is valid
+    Given the User is on the Landing Page
+    When the email is unverified, a required field is invalid, or either legal document has not been accepted
+    Then Continue to payment remains disabled
+
+  Scenario: Prevent access when payment is not confirmed
+    Given the User submitted a purchase request
+    And the payment was not confirmed
+    When the User attempts to activate or access the account
+    Then the system denies access
+    And the account remains unavailable until payment confirmation

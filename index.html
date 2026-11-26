@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" id="page-description" content="SmartGN monitors natural gas supply with real-time IoT telemetry, alerts, and control." />
-  <title id="page-title">SmartGN | Real-Time Natural Gas Management and Monitoring</title>
+  <meta name="description" id="page-description" content="Track your natural gas consumption in real time, receive alerts, and request installation of your SmartGN meter." />
+  <title>SmartGN · Real-Time Natural Gas Monitoring</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -140,10 +140,10 @@
           <h3 id="plan-2-title">Pro Plan</h3>
           <div class="pricing-price">S/ 35<span id="plan-2-period">/month</span></div>
           <ul class="pricing-features">
-            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f1">Multi-Meter Manager (Buildings)</span></li>
             <li><i class="fa-solid fa-check"></i> <span id="plan-2-f2">Comparisons of multiple points</span></li>
             <li><i class="fa-solid fa-check"></i> <span id="plan-2-f3">Detailed consolidated reports</span></li>
             <li><i class="fa-solid fa-check"></i> <span id="plan-2-f4">Advanced consumption history (12 months)</span></li>
+            <li><i class="fa-solid fa-check"></i> <span id="plan-2-f5">Priority handling for support tickets</span></li>
           </ul>
         </div>
       </div>
@@ -207,17 +207,41 @@
     <div class="container about-centered">
       <h2 id="about-title">About Us</h2>
       <p id="about-desc">In fast-growing cities where safety and resource control are top priorities, <strong>SmartGN</strong> (developed by <em>Ventrax</em>) centralizes natural gas supply management for homes, businesses, and buildings. We use IoT sensors and real-time telemetry to track consumption, monitor valve states, dispatch critical alerts, and connect users with verified technicians.</p>
-      <img src="assets/acercanosotros.avif" id="about-image-alt" alt="Monitoring and metrics dashboard" class="about-main-img" />
+      <div class="team-video">
+        <button type="button" id="team-video-play" aria-label="Team video not configured" disabled>
+          <i class="fa-solid fa-play" aria-hidden="true"></i>
+        </button>
+        <iframe id="team-video" data-video-url="" title="About the SmartGN team"
+          allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen hidden></iframe>
+      </div>
 
       <div class="team-section">
         <h3 id="team-title">Team Members</h3>
         <div class="team-row">
-          <img src="assets/integrante1.png" id="team-image-1-alt" alt="Team member 1" class="team-member" />
-          <img src="assets/integrante2.png" id="team-image-2-alt" alt="Team member 2" class="team-member" />
-          <img src="assets/integrante3.png" id="team-image-3-alt" alt="Team member 3" class="team-member" />
-          <img src="assets/integrante4.png" id="team-image-4-alt" alt="Team member 4" class="team-member" />
-          <img src="assets/integrante5.png" id="team-image-5-alt" alt="Team member 5" class="team-member" />
-          <img src="assets/integrante6.png" id="team-image-6-alt" alt="Team member 6" class="team-member" />
+          <figure class="team-profile">
+            <img src="assets/integrante1.png" alt="" class="team-member" />
+            <figcaption>Adrian Ruiz Mideyros</figcaption>
+          </figure>
+          <figure class="team-profile">
+            <img src="assets/integrante2.png" alt="" class="team-member" />
+            <figcaption>Paul Alexandro Espinoza López</figcaption>
+          </figure>
+          <figure class="team-profile">
+            <img src="assets/integrante3.png" alt="" class="team-member" />
+            <figcaption>Cesar Jair Contreras Rojas</figcaption>
+          </figure>
+          <figure class="team-profile">
+            <img src="assets/integrante4.png" alt="" class="team-member" />
+            <figcaption>Winnie Lisbeth Merino Ordinola</figcaption>
+          </figure>
+          <figure class="team-profile">
+            <img src="assets/integrante5.png" alt="" class="team-member" />
+            <figcaption>Iván Fernando Sánchez Guevara</figcaption>
+          </figure>
+          <figure class="team-profile">
+            <img src="assets/integrante6.png" alt="" class="team-member" />
+            <figcaption>Ayrton Omar Briceño Llanos</figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -237,73 +261,69 @@
         <div class="checkout-grid">
           <!-- Left column: request form -->
           <div class="checkout-form-container">
-            <div class="checkout-form" id="checkout-form" role="form" aria-label="Installation request">
+            <form class="checkout-form" id="checkout-email-form" method="post">
+              <div class="form-group">
+                <label for="input-email" id="label-email">Email Address</label>
+                <input type="email" id="input-email" maxlength="254" autocomplete="email" required>
+              </div>
+              <button type="submit" class="btn-primary" id="checkout-send-code" disabled>Send code</button>
+            </form>
+            <form class="checkout-form" id="checkout-code-form" method="post" hidden>
+              <div class="form-group">
+                <label for="checkout-code" id="checkout-code-label">Six-digit code</label>
+                <input type="text" id="checkout-code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required>
+              </div>
+              <button type="submit" class="btn-primary" id="checkout-confirm-code">Verify email</button>
+            </form>
+            <p class="form-status" id="checkout-email-status" role="status"></p>
+            <form class="checkout-form" id="checkout-form" method="post" data-gateway-url="" aria-label="Installation request">
+              <fieldset id="checkout-details" disabled>
 
               <!-- Contact information -->
               <h3 id="form-contact-title">1. Contact Information</h3>
               <div class="form-row">
                 <div class="form-group">
                   <label for="input-fname" id="label-fname">First Name</label>
-                  <input type="text" id="input-fname" name="firstName" autocomplete="given-name" placeholder="e.g. John" required>
+                  <input type="text" id="input-fname" name="firstName" maxlength="100" autocomplete="given-name" placeholder="Andrea" required>
                 </div>
                 <div class="form-group">
                   <label for="input-lname" id="label-lname">Last Name</label>
-                  <input type="text" id="input-lname" name="lastName" autocomplete="family-name" placeholder="e.g. Smith" required>
+                  <input type="text" id="input-lname" name="lastName" maxlength="99" autocomplete="family-name" placeholder="García" required>
                 </div>
               </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="input-email" id="label-email">Email Address</label>
-                  <input type="email" id="input-email" name="email" autocomplete="email" placeholder="john@example.com" required>
-                </div>
-                <div class="form-group">
-                  <label for="input-phone" id="label-phone">Phone Number</label>
-                  <input type="tel" id="input-phone" name="phone" autocomplete="tel" placeholder="+1 555 555 5555" required>
-                </div>
+              <div class="form-group">
+                <label for="input-phone" id="label-phone">Phone Number</label>
+                <input type="tel" id="input-phone" name="phone" inputmode="numeric" pattern="\+51 [0-9]{3} [0-9]{3} [0-9]{3}" autocomplete="tel" placeholder="+51 912 345 678" required>
               </div>
 
               <!-- Installation address -->
               <h3 id="form-location-title" style="margin-top: 2rem;">2. Installation Address</h3>
               <div class="form-group">
                 <label for="input-address" id="label-address">Full Address</label>
-                <input type="text" id="input-address" name="address" autocomplete="street-address" placeholder="123 Main St, Apt 4" required>
+                <input type="text" id="input-address" name="address" maxlength="300" autocomplete="street-address" placeholder="Av. José Larco 345, Dpto. 402" required>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="input-city" id="label-city">City / District</label>
-                  <input type="text" id="input-city" name="city" autocomplete="address-level2" placeholder="e.g. Miraflores, Lima" required>
+                  <input type="text" id="input-city" name="city" maxlength="150" autocomplete="address-level2" placeholder="Miraflores, Lima" required>
                 </div>
                 <div class="form-group">
                   <label for="input-zip" id="label-zip">Zip / Postal Code</label>
-                  <input type="text" id="input-zip" name="postalCode" autocomplete="postal-code" placeholder="e.g. 15074" required>
+                  <input type="text" id="input-zip" name="postalCode" maxlength="40" autocomplete="postal-code" placeholder="15074" required>
                 </div>
               </div>
 
-              <h3 id="form-payment-title" style="margin-top: 2rem;">3. Confirmation</h3>
-              <p class="form-demo-note" id="form-demo-note">This site does not receive requests or process payments yet. Do not enter card details.</p>
-
-              <div class="form-group">
-                <label for="input-cardname" id="label-cardname">Name on card</label>
-                <input type="text" id="input-cardname" name="cardName" autocomplete="cc-name" placeholder="JOHN SMITH" required>
-              </div>
-              <div class="form-group">
-                <label for="input-cardnumber" id="label-cardnumber">Card number</label>
-                <input type="text" id="input-cardnumber" name="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" required>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="input-exp" id="label-exp">Expiration</label>
-                  <input type="text" id="input-exp" name="cardExpiration" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" required>
-                </div>
-                <div class="form-group">
-                  <label for="input-cvv" id="label-cvv">Security code</label>
-                  <input type="password" id="input-cvv" name="cardSecurityCode" inputmode="numeric" autocomplete="cc-csc" placeholder="CVV" maxlength="4" required>
+              <div class="checkout-legal">
+                <input type="checkbox" id="checkout-legal-accepted" required aria-labelledby="checkout-legal-text">
+                <div id="checkout-legal-text">
+                  <label for="checkout-legal-accepted" id="checkout-legal-prefix">I accept the</label>
+                  <a id="checkout-privacy-link" href="#privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+                  <span id="checkout-legal-and">and the</span>
+                  <a id="checkout-terms-link" href="#terms-and-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
                 </div>
               </div>
-
-              <button type="button" class="btn-primary" id="btn-submit-order" style="width: 100%; margin-top: 1.5rem; justify-content: center; font-size: 1.2rem;">Request Installation</button>
-              <p class="form-status" id="form-status" role="status" aria-live="polite" hidden>This form is not connected yet. No request was sent and your details were not shared.</p>
-            </div>
+              </fieldset>
+            </form>
           </div>
 
           <!-- Right column: order summary -->
@@ -322,7 +342,26 @@
               <span id="summary-total-label">Estimated total</span>
               <span>S/ 250.00</span>
             </div>
-            <p id="summary-note" class="summary-note">These amounts are estimates. This page does not process payments or send requests yet.</p>
+            <button type="submit" class="btn-primary" id="btn-submit-order" form="checkout-form" disabled>Continue to payment</button>
+            <button type="button" class="btn-primary checkout-action" id="checkout-start-payment" hidden>Open Niubiz Sandbox</button>
+            <section class="checkout-payment" id="checkout-payment" aria-labelledby="checkout-card-title" hidden>
+              <h3 id="checkout-card-title">Niubiz Sandbox</h3>
+              <p id="checkout-card-note" class="form-confirmation-note form-status">Use a test card. This payment will not charge real money.</p>
+              <p class="niubiz-label" id="checkout-card-number">Card number</p>
+              <div id="niubiz-number" class="niubiz-field" role="group" aria-labelledby="checkout-card-number"></div>
+              <div class="form-row">
+                <div>
+                  <p class="niubiz-label" id="checkout-card-expiry">Expiry date</p>
+                  <div id="niubiz-expiry" class="niubiz-field" role="group" aria-labelledby="checkout-card-expiry"></div>
+                </div>
+                <div>
+                  <p class="niubiz-label" id="checkout-card-cvc">CVV</p>
+                  <div id="niubiz-cvc" class="niubiz-field" role="group" aria-labelledby="checkout-card-cvc"></div>
+                </div>
+              </div>
+              <button type="button" class="btn-primary checkout-action" id="checkout-pay" disabled>Pay in Sandbox</button>
+            </section>
+            <p class="form-status" id="form-status" role="status" hidden></p>
           </div>
         </div>
       </div>
@@ -330,12 +369,50 @@
   </main>
 
   <!-- FOOTER -->
+  <main id="legal-page" class="legal-page container" hidden>
+    <span id="privacy-policy"></span><span id="terms-and-conditions"></span>
+    <a href="#home" class="legal-back-link">
+      <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+      <span id="legal-back">Back to home</span>
+    </a>
+    <article>
+      <h1 id="legal-title"></h1>
+      <div id="legal-content"></div>
+    </article>
+  </main>
+
   <footer class="footer">
     <div class="container footer-content">
-      <p id="footer-copy">© 2026 SmartGN by Ventrax. All rights reserved.</p>
+      <div class="footer-brand">
+        <a href="#home" class="brand">
+          <img src="assets/newlogo.png" alt="" class="brand-logo">
+          <span class="brand-name">Smart<span>GN</span></span>
+        </a>
+        <p id="footer-summary">Monitor your natural gas consumption and receive alerts from your SmartGN meter.</p>
+        <p id="footer-copy">© 2026 SmartGN by Ventrax. All rights reserved.</p>
+      </div>
+      <nav id="footer-navigation" class="footer-links" aria-label="Footer">
+        <a href="#product" id="footer-product">Product</a>
+        <a href="#plans" id="footer-plans">Plans</a>
+        <a href="#countries" id="footer-countries">Countries</a>
+        <a href="#regions" id="footer-regions">Regions</a>
+        <a href="#about-us" id="footer-about">About Us</a>
+        <a href="#request-installation" id="footer-contracting">Get started</a>
+        <div class="footer-legal-links">
+          <a href="#privacy-policy" id="footer-privacy">Privacy Policy</a>
+          <a href="#terms-and-conditions" id="footer-terms">Terms &amp; Conditions</a>
+        </div>
+      </nav>
     </div>
   </footer>
 
+  <dialog id="checkout-success-dialog" aria-labelledby="checkout-success-title">
+    <div class="checkout-success-icon" aria-hidden="true">✓</div>
+    <h2 id="checkout-success-title">Payment confirmed</h2>
+    <p id="checkout-success-email"></p>
+    <button id="checkout-success-home" type="button" class="btn-primary">Back to home</button>
+  </dialog>
+  <script src="legal-content.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
